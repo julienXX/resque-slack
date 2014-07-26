@@ -1,10 +1,9 @@
 # -*- encoding: utf-8 -*-
-$LOAD_PATH.push File.expand_path('../lib/resque/plugins', __FILE__)
-require 'version'
+$LOAD_PATH.push File.expand_path('../lib/resque/failure', __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = 'resque-slack'
-  s.version     = Resque::Plugins::Slack::VERSION
+  s.version     = Resque::Failure::Slack::Version
   s.authors     = ['Julien Blanchard']
   s.email       = ['julien@sideburns.eu']
   s.homepage    = 'https://www.github.com/julienXX/resque-slack'
