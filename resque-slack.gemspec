@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 $LOAD_PATH.push File.expand_path('../lib/resque/failure', __FILE__)
+require 'slack'
 
 Gem::Specification.new do |s|
   s.name        = 'resque-slack'

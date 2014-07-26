@@ -1,3 +1,5 @@
+require 'resque'
+
 module Resque
   module Failure
     class Slack < Base
