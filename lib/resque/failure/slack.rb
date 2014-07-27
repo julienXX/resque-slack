@@ -28,10 +28,17 @@ module Resque
       # When a job fails, a new instance is created and #save is called.
       def save
         return unless configured?
+
+        Notifier.report_exception
       end
 
       def self.configured?
         channel && token
+      end
+
+      class Notifier
+        def self.report_exception
+        end
       end
     end
   end
