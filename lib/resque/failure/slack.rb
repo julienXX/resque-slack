@@ -25,21 +25,30 @@ module Resque
         fail 'Slack channel and token are not configured.' unless configured?
       end
 
+      def configured?
+        !!self.class.channel && !!self.class.token
+      end
+
       # Sends the exception data to the Slack channel.
       #
       # When a job fails, a new instance is created and #save is called.
       def save
-        report_exception(*args)
+        return unless configured?
+        report_exception
       end
 
       SLACK_URL = 'https://slack.com/api'
 
+      # Sends a HTTP Post to the Slack api.
+      #
       def report_exception
         uri = URI.parse(SLACK_URL + '/chat.postMessage')
-        params = { 'channel' => channel, 'token' => token, 'text' => text }
+        params = { 'channel' => self.class.channel, 'token' => self.class.token, 'text' => text }
         Net::HTTP.post_form(uri, params)
       end
 
+      # Text to be displayed in the Slack notification
+      #
       def text
         <<-EOF
 #{worker} failed processing #{queue}:
