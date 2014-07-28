@@ -10,6 +10,17 @@ module Resque
       class << self
         attr_accessor :channel # Slack channel id.
         attr_accessor :token   # Team token
+        # Notification style:
+        #
+        # verbose: full backtrace (default)
+        # compact: exception only
+        # minimal: worker and payload
+        attr_accessor :level
+
+        LEVELS = %i(verbose compact minimal)
+        def level
+          @level && LEVELS.include?(@level) ? @level : :verbose
+        end
       end
 
       # Configures the failure backend. You will need to set
@@ -19,6 +30,7 @@ module Resque
       #   Resque::Failure::Slack.configure do |config|
       #     config.channel = 'CHANNEL_ID'
       #     config.token = 'TOKEN'
+      #     config.verbose = true or false, true is the default
       #   end
       def self.configure
         yield self
@@ -50,6 +62,10 @@ module Resque
       # Text to be displayed in the Slack notification
       #
       def text
+        send("text_#{self.class.level}")
+      end
+
+      def text_verbose
         <<-EOF
 #{worker} failed processing #{queue}:
 Payload:
@@ -57,6 +73,24 @@ Payload:
 Exception:
   #{exception}
 #{exception.backtrace.map { |l| '  ' + l }.join('\n')}
+        EOF
+      end
+
+      def text_compact
+        <<-EOF
+#{worker} failed processing #{queue}:
+Payload:
+#{payload.inspect.split("\n").map { |l| '  ' + l }.join('\n')}
+Exception:
+  #{exception}
+        EOF
+      end
+
+      def text_minimal
+        <<-EOF
+#{worker} failed processing #{queue}:
+Payload:
+#{payload.inspect.split("\n").map { |l| '  ' + l }.join('\n')}
         EOF
       end
     end
