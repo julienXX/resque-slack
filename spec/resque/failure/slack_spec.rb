@@ -6,7 +6,7 @@ describe Resque::Failure::Slack do
       expect(described_class.configured?).to be_falsey
     end
 
-    it 'needs a channel and a token' do
+    it 'fails without token' do
       expect {
         Resque::Failure::Slack.configure do |config|
           config.channel = 'CHANNEL_ID'
@@ -14,7 +14,9 @@ describe Resque::Failure::Slack do
         end
       }.to raise_error RuntimeError
       expect(described_class.configured?).to be_falsey
+    end
 
+    it 'fails without channel' do
       expect {
         Resque::Failure::Slack.configure do |config|
           config.channel = nil
@@ -22,7 +24,9 @@ describe Resque::Failure::Slack do
         end
       }.to raise_error RuntimeError
       expect(described_class.configured?).to be_falsey
+    end
 
+    it 'succeed with a channel and a token' do
       Resque::Failure::Slack.configure do |config|
         config.channel = 'CHANNEL_ID'
         config.token = 'TOKEN'
