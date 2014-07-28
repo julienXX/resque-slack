@@ -1,4 +1,6 @@
 require 'resque'
+require 'uri'
+require 'net/http'
 
 module Resque
   module Failure
@@ -29,16 +31,30 @@ module Resque
       def save
         return unless configured?
 
-        Notifier.report_exception
+        report_exception(*args)
       end
 
       def self.configured?
-        channel && token
+        !!channel && !!token
       end
 
-      class Notifier
-        def self.report_exception
-        end
+      SLACK_URL = 'https://slack.com/api'
+
+      def self.report_exception
+        uri = URI.parse(SLACK_URL + '/chat.postMessage')
+        params = { 'channel' => channel, 'token' => token, 'text' => text }
+        Net::HTTP.post_form(uri, params)
+      end
+
+      def self.text
+        <<-EOF
+#{worker} failed processing #{queue}:
+Payload:
+#{payload.inspect.split("\n").map { |l| '  ' + l }.join('\n')}
+Exception:
+  #{exception}
+#{exception.backtrace.map { |l| '  ' + l }.join('\n')}
+        EOF
       end
     end
   end
