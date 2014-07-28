@@ -82,24 +82,24 @@ module Resque
 
       def text_verbose
         <<-EOF
-#{worker}
-#{payload}
-#{exception(true)}
+#{msg_worker}
+#{msg_payload}
+#{msg_exception(true)}
         EOF
       end
 
       def text_compact
         <<-EOF
-#{worker}
-#{payload}
-#{exception(false)}
+#{msg_worker}
+#{msg_payload}
+#{msg_exception(false)}
         EOF
       end
 
       def text_minimal
         <<-EOF
-#{worker}
-#{payload}
+#{msg_worker}
+#{msg_payload}
         EOF
       end
 
