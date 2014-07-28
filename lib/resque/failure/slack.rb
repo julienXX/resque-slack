@@ -29,13 +29,7 @@ module Resque
       #
       # When a job fails, a new instance is created and #save is called.
       def save
-        return unless configured?
-
         report_exception(*args)
-      end
-
-      def configured?
-        !!channel && !!token
       end
 
       SLACK_URL = 'https://slack.com/api'
