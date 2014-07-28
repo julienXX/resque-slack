@@ -67,34 +67,42 @@ module Resque
 
       protected
 
+      def msg_worker
+       "#{worker} failed processing #{queue}"
+      end
+
+      def msg_payload
+        "Payload:\n#{payload.inspect.split("\n").map { |l| '  ' + l }.join('\n')}"
+      end
+
+      def msg_exception(backtrace)
+        str = "Exception:\n#{exception}"
+        str += "\n#{exception.backtrace.map { |l| '  ' + l }.join('\n')}" if backtrace
+      end
+
       def text_verbose
         <<-EOF
-#{worker} failed processing #{queue}:
-Payload:
-#{payload.inspect.split("\n").map { |l| '  ' + l }.join('\n')}
-Exception:
-  #{exception}
-#{exception.backtrace.map { |l| '  ' + l }.join('\n')}
+#{worker}
+#{payload}
+#{exception(true)}
         EOF
       end
 
       def text_compact
         <<-EOF
-#{worker} failed processing #{queue}:
-Payload:
-#{payload.inspect.split("\n").map { |l| '  ' + l }.join('\n')}
-Exception:
-  #{exception}
+#{worker}
+#{payload}
+#{exception(false)}
         EOF
       end
 
       def text_minimal
         <<-EOF
-#{worker} failed processing #{queue}:
-Payload:
-#{payload.inspect.split("\n").map { |l| '  ' + l }.join('\n')}
+#{worker}
+#{payload}
         EOF
       end
+
     end
   end
 end
