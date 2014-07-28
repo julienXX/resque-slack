@@ -25,15 +25,15 @@ module Resque
         fail 'Slack channel and token are not configured.' unless configured?
       end
 
-      def configured?
-        !!self.class.channel && !!self.class.token
+      def self.configured?
+        !!channel && !!token
       end
 
       # Sends the exception data to the Slack channel.
       #
       # When a job fails, a new instance is created and #save is called.
       def save
-        return unless configured?
+        return unless self.class.configured?
         report_exception
       end
 
