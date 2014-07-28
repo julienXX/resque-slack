@@ -72,7 +72,8 @@ describe Resque::Failure::Slack do
       end
 
       uri = URI.parse(described_class::SLACK_URL + '/chat.postMessage')
-      params = { 'channel' => 'CHANNEL_ID', 'token' => 'TOKEN', 'text' => slack.text_minimal }
+      text = slack.send(:text_minimal)
+      params = { 'channel' => 'CHANNEL_ID', 'token' => 'TOKEN', 'text' => text }
 
       expect(Net::HTTP).to receive(:post_form)
         .with(uri, params)

@@ -6,10 +6,12 @@ module Resque
   module Failure
     class Slack < Base
       LEVELS = %i(verbose compact minimal)
+      SLACK_URL = 'https://slack.com/api'
 
       class << self
         attr_accessor :channel # Slack channel id.
         attr_accessor :token   # Team token
+
         # Notification style:
         #
         # verbose: full backtrace (default)
@@ -49,8 +51,6 @@ module Resque
         report_exception
       end
 
-      SLACK_URL = 'https://slack.com/api'
-
       # Sends a HTTP Post to the Slack api.
       #
       def report_exception
@@ -64,6 +64,8 @@ module Resque
       def text
         send("text_#{self.class.level}")
       end
+
+      protected
 
       def text_verbose
         <<-EOF
