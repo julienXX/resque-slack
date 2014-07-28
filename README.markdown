@@ -23,19 +23,17 @@ Or install it yourself as:
 
 Configure your channel and token:
 ```ruby
-Resque::Plugins::Slack.config = { channel: CHANNEL_ID, token: TOKEN }
+require 'resque/failure/slack'
+
+Resque::Failure::Slack.configure do |config|
+  config.channel = 'CHANNEL_ID'
+  config.token = 'TEAM_TOKEN'
+end
+
+Resque::Failure.backend = Resque::Failure::Slack
+
 ```
 NB: Your team token is found [here](https://api.slack.com/#auth)
-
-Extend your Job class with resque-slack:
-```ruby
-    require 'resque/plugins/slack'
-
-    class JobWhoseFailuresIWantToBeNotified
-      extend Resque::Plugins::Slack
-      ...
-    end
-```
 
 ## Contributing
 
