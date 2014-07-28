@@ -34,19 +34,19 @@ module Resque
         report_exception(*args)
       end
 
-      def self.configured?
+      def configured?
         !!channel && !!token
       end
 
       SLACK_URL = 'https://slack.com/api'
 
-      def self.report_exception
+      def report_exception
         uri = URI.parse(SLACK_URL + '/chat.postMessage')
         params = { 'channel' => channel, 'token' => token, 'text' => text }
         Net::HTTP.post_form(uri, params)
       end
 
-      def self.text
+      def text
         <<-EOF
 #{worker} failed processing #{queue}:
 Payload:
