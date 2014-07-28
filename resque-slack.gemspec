@@ -4,7 +4,7 @@ require 'slack'
 
 Gem::Specification.new do |s|
   s.name        = 'resque-slack'
-  s.version     = Resque::Failure::Slack::Version
+  s.version     = '0.1.0'
   s.authors     = ['Julien Blanchard']
   s.email       = ['julien@sideburns.eu']
   s.homepage    = 'https://www.github.com/julienXX/resque-slack'

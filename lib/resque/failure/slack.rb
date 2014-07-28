@@ -5,7 +5,6 @@ require 'net/http'
 module Resque
   module Failure
     class Slack < Base
-      Version = '0.1.0'
       LEVELS = %i(verbose compact minimal)
 
       class << self
