@@ -6,6 +6,7 @@ module Resque
   module Failure
     class Slack < Base
       Version = '0.1.0'
+      LEVELS = %i(verbose compact minimal)
 
       class << self
         attr_accessor :channel # Slack channel id.
@@ -17,7 +18,6 @@ module Resque
         # minimal: worker and payload
         attr_accessor :level
 
-        LEVELS = %i(verbose compact minimal)
         def level
           @level && LEVELS.include?(@level) ? @level : :verbose
         end
@@ -46,6 +46,7 @@ module Resque
       # When a job fails, a new instance is created and #save is called.
       def save
         return unless self.class.configured?
+
         report_exception
       end
 

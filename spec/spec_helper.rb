@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'resque'
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'resque-slack'))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'resque', 'failure', 'slack'))
 
 RSpec.configure do |config|
   config.mock_framework = :rspec
