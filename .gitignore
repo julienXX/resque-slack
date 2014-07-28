@@ -4,3 +4,4 @@ Gemfile.lock
 pkg/*
 tags
 /.DS_Store
+.ruby-version
