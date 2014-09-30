@@ -62,47 +62,9 @@ module Resque
       # Text to be displayed in the Slack notification
       #
       def text
-        send("text_#{self.class.level}")
+        Notification.generate(self, self.class.level)
       end
-
-      protected
-
-      def msg_worker
-       "#{worker} failed processing #{queue}"
-      end
-
-      def msg_payload
-        "Payload:\n#{payload.inspect.split("\n").map { |l| '  ' + l }.join('\n')}"
-      end
-
-      def msg_exception(backtrace)
-        str = "Exception:\n#{exception}"
-        str += "\n#{exception.backtrace.map { |l| '  ' + l }.join('\n')}" if backtrace
-      end
-
-      def text_verbose
-        <<-EOF
-#{msg_worker}
-#{msg_payload}
-#{msg_exception(true)}
-        EOF
-      end
-
-      def text_compact
-        <<-EOF
-#{msg_worker}
-#{msg_payload}
-#{msg_exception(false)}
-        EOF
-      end
-
-      def text_minimal
-        <<-EOF
-#{msg_worker}
-#{msg_payload}
-        EOF
-      end
-
     end
   end
 end
+
