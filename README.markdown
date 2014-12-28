@@ -54,7 +54,3 @@ NB: Your team token is found [here](https://api.slack.com/#auth)
 [slack]: http://slack.com
 
 [![Build Status](https://travis-ci.org/julienXX/resque-slack.png)](https://travis-ci.org/julienXX/resque-slack) [![Code Climate](https://codeclimate.com/github/julienXX/resque-slack.png)](https://codeclimate.com/github/julienXX/resque-slack)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/julienXX/resque-slack/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
