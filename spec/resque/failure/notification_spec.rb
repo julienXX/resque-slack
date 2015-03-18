@@ -12,7 +12,7 @@ describe Resque::Failure::Notification do
       def expected_notification
         {
           verbose: "worker failed processing queue\nPayload:\n\t\"payload\"\nException:\nexception\n\tbacktrace",
-          compact: "worker failed processing queue\nPayload:\n\t\"payload\"\n",
+          compact: "worker failed processing queue\nPayload:\n\t\"payload\"\nException:\nexception",
           minimal: "worker failed processing queue\nPayload:\n\t\"payload\""
         }
       end
