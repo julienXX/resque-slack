@@ -3,7 +3,7 @@ $LOAD_PATH.push File.expand_path('../lib/resque/failure', __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = 'resque-slack'
-  s.version     = '0.1.0'
+  s.version     = '0.2.0'
   s.authors     = ['Julien Blanchard']
   s.email       = ['julien@sideburns.eu']
   s.homepage    = 'https://www.github.com/julienXX/resque-slack'
@@ -11,7 +11,6 @@ Gem::Specification.new do |s|
   s.description = %q{Slack notifications for your failed jobs}
 
   s.rubyforge_project = 'resque-slack'
-  s.has_rdoc          = false
 
   s.files             = %w(LICENSE Rakefile README.markdown)
   s.files            += Dir.glob('{spec/*,lib/**/*}')
