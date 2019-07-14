@@ -10,8 +10,6 @@ Gem::Specification.new do |s|
   s.summary     = %q{Post Slack notifications whenever one of your Resque jobs fails}
   s.description = %q{Slack notifications for your failed jobs}
 
-  s.rubyforge_project = 'resque-slack'
-
   s.files             = %w(LICENSE Rakefile README.markdown)
   s.files            += Dir.glob('{spec/*,lib/**/*}')
   s.require_paths     = ['lib']
