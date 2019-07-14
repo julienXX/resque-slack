@@ -53,4 +53,4 @@ NB: Your team token is found [here](https://api.slack.com/#auth)
 [rq]: http://github.com/julienXX/resque
 [slack]: http://slack.com
 
-[![Build Status](https://travis-ci.org/julienXX/resque-slack.png)](https://travis-ci.org/julienXX/resque-slack) [![Code Climate](https://codeclimate.com/github/julienXX/resque-slack.png)](https://codeclimate.com/github/julienXX/resque-slack)
+[![Build Status](https://travis-ci.org/julienXX/resque-slack.svg)](https://travis-ci.org/julienXX/resque-slack) [![Code Climate](https://codeclimate.com/github/julienXX/resque-slack.svg)](https://codeclimate.com/github/julienXX/resque-slack)
