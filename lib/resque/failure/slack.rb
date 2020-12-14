@@ -2,6 +2,8 @@ require 'resque'
 require 'uri'
 require 'net/http'
 
+require 'resque/failure/notification'
+
 module Resque
   module Failure
     class Slack < Base
